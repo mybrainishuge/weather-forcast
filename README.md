@@ -1,44 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Five Day Weather
 
-## Available Scripts
+### Running the app
 
-In the project directory, you can run:
+1. Install dependencies
 
-### `npm start`
+```sh
+> npm install
+```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. Add your OpenWeatherMap API key to `.env` in the root directory
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+```sh
+REACT_APP_OPENWEATHERMAP_API_KEY=YOUR_API_KEY_HERE
+```
 
-### `npm test`
+3. Start server
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+> npm start
+```
 
-### `npm run build`
+4. open http://localhost:3000 in your web browser
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Testing
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```sh
+> npm test
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Approach
 
-### `npm run eject`
+With a general idea for what the app would do, I imagined a basic UI for the app. Before I could begin building that UI, I needed to familiarize myself with Open Weather Map's API to know what data I would have. The API response allowed me to make decisions for what data I would render to the user which directly affects all sorts of UI decision. Since I'm not building world's first weather app, I consulted various well-known weather websites to see what data most of them use and get a feel for what makes for a sensible UI.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+With a basic UI in mind, I chose to use React which makes it easy to create reusable components and think about one-way data flow where the app always reflects state. I then selected a few complimentary libraries to make my life a little easier. `react-flexbox-grid` gives me grid system for responive page layout. `react-responsive` lets me make arrangement and display decisions based on the window size. `styled-components` lets me create components with encapsulated style. I chose `axios` which simplifies making HTTP requests when the user searches for city/zip code. `momentjs` provides a powerful and simple API for formatting date/time values.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Trade-offs
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- I would like to have implemented this using TypeScript, but TS requires additional setup and organization which likely would've slowed development unnecessarily
+- The design could be cleaner and more compact. Would be nice to display minimal data and provide the ability to click on something to reveal more data, but I opted for a less sophisticated layout for the initial implementation
+- I like making the frontend as dumb as possible. Relying on the backend to gather, process, and shape payloads can dramatically simplify the frontend. A simpler frontend will most likely reduce app bloat and potentially result in a more performant app. For this project, I
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Future development
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Expand test coverage
+- Cleanup handleSubmit method
+- Automatic geolocation detection
+- Search autocompletion
+- Display state/region name along with city
+- Better error handling
+- Processing animations
+- Short "recent searches" list
+- Assume temperature unit based on search parameter if user doesn't specify
+- Deploy app
